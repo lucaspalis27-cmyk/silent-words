@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>...</title>
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #0f172a;
+  font-family: Arial, sans-serif;
+  color: white;
+}
+
+/* intro screen */
+#intro {
+  text-align: center;
+  cursor: pointer;
+  animation: fadeIn 1s ease;
+}
+
+#intro h1 {
+  font-size: 22px;
+  margin-bottom: 10px;
+  font-weight: normal;
+  color: #e2e8f0;
+}
+
+#intro p {
+  color: #94a3b8;
+  font-size: 14px;
+}
+
+/* letter */
+#letter {
+  display: none;
+}
+
+.paper {
+  width: 90%;
+  max-width: 650px;
+  background: #fdf6e3;
+  color: #1f2937;
+  padding: 40px;
+  border-radius: 10px;
+  line-height: 1.8;
+  font-family: Georgia, serif;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+}
+
+/* blinking cursor */
+#text::after {
+  content: "|";
+  animation: blink 0.8s infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+</style>
+</head>
+
+<body>
+
+<!-- INTRO SCREEN -->
+<div id="intro">
+  <h1>Are you sure you want to open this?</h1>
+  <p>(Click anywhere to continue)</p>
+</div>
+
+<!-- LETTER -->
+<div id="letter">
+  <div class="paper">
+    <div id="text"></div>
+  </div>
+</div>
+
+<script>
+const message = `Hey...
+
+I don’t usually express things like this in words,
+so I decided to write it down.
+
+I just wanted to be honest with you.
+
+I like you.
+
+You don’t have to feel the same way,
+and there’s no pressure at all.
+
+I just didn’t want to keep it to myself.
+
+That’s all.`;
+
+let i = 0;
+
+function typeWriter() {
+  if (i < message.length) {
+    document.getElementById("text").innerHTML += message.charAt(i);
+    i++;
+    setTimeout(typeWriter, 35);
+  }
+}
+
+// click intro → show letter
+document.getElementById("intro").onclick = function () {
+  document.getElementById("intro").style.display = "none";
+  document.getElementById("letter").style.display = "block";
+  typeWriter();
+};
+</script>
+
+</body>
+</html>
